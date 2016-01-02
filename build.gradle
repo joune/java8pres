@@ -1,0 +1,22 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+repositories {
+  mavenLocal()
+  mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+
+sourceSets {
+  sourceCompatibility = '1.7'
+  targetCompatibility = '1.7'
+}
+
+task run(type: JavaExec) {
+  classpath = sourceSets.main.runtimeClasspath
+  main = 'com.example.rpn.Main'
+  args '10 4 3 + 2 * -', '1 2 ?', '2 +'
+}
