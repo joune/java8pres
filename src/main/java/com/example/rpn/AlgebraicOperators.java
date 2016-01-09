@@ -1,71 +1,20 @@
 package com.example.rpn;
 
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BinaryOperator;
+
+
 public final class AlgebraicOperators
 {
   private AlgebraicOperators() {}
 
-  public static Operator[] OPERATORS = new Operator[] {
-    new Sum(), new Subtraction(), new Multiplication(), new Division()
-  };
-
-  public static class Sum implements Operator
-  {
-    @Override
-    public String designation()
-    {
-      return "+";
-    }
-
-    @Override
-    public double apply(double operand1, double operand2)
-    {
-      return operand1 + operand2;
-    }
-  }
-
-  public static class Subtraction implements Operator
-  {
-    @Override
-    public String designation()
-    {
-      return "-";
-    }
-
-    @Override
-    public double apply(double operand1, double operand2)
-    {
-      return operand1 - operand2;
-    }
-  }
-
-  public static class Multiplication implements Operator
-  {
-    @Override
-    public String designation()
-    {
-      return "*";
-    }
-
-    @Override
-    public double apply(double operand1, double operand2)
-    {
-      return operand1 * operand2;
-    }
-  }
-
-  public static class Division implements Operator
-  {
-    @Override
-    public String designation()
-    {
-      return "/";
-    }
-
-    @Override
-    public double apply(double operand1, double operand2)
-    {
-      return operand1 / operand2;
-    }
+  public static Map<String,BinaryOperator<Double>> OPERATORS = new HashMap<>();
+  static {
+    OPERATORS.put("+", (op1, op2) -> op1 + op2);
+    OPERATORS.put("-", (op1, op2) -> op1 - op2);
+    OPERATORS.put("*", (op1, op2) -> op1 * op2);
+    OPERATORS.put("/", (op1, op2) -> op1 / op2);
   }
 }

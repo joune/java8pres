@@ -30,3 +30,8 @@
 
 0. Design for lambdas - can also build own code for it
 1. Make Operator interface "functional" - we don't use `designation()` outside of registration anyway
+2. First, refactor the code to get it working again (for OperatorRegistry - allow passing a map)
+3. Now, looking at Sum, Subtraction, etc. - they can be replaced with lambdas
+4. Git diff - whole bunch of classes removed
+4.1. Hint - Java 8 comes with a lot of "functional" interfaces. Look at Javadoc. Use Java's Operator. Git diff again.
+5. AlgebraicOperators serves sharing those operators, so let's keep it. Don't like the Map stuff though.

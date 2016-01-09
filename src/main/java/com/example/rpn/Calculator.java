@@ -1,6 +1,7 @@
 package com.example.rpn;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
 
 
 public class Calculator
@@ -17,7 +18,7 @@ public class Calculator
     String[] elements = expr.split(" ");
     Queue<Double> calcStack = Collections.asLifoQueue(new ArrayDeque<Double>());
     for (String element : elements) {
-      Operator op = operators.find(element);
+      BinaryOperator<Double> op = operators.find(element);
       if (op != null && calcStack.size() >= 2) {
         Double op2 = calcStack.poll();
         Double op1 = calcStack.poll();
