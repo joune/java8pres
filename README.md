@@ -45,3 +45,8 @@
 3. Also, construction is not evident - do we pass result or error
 4. Notice how Main became declarative now. Instead of telling to iterate and checking, we "define" what the output is.
 5. Also, it seems to be a common need. Let's factorize - `Either`
+
+0. Now the last piece - `Calculator` itself: for loop, multiple return statements.
+1. We want to walk the stack and come to a single value - reduce it to a single value
+2. Also, we want this value to be either an error or a result - we already have a thing for it!
+3. Au passage - change `OperatorRegistry.find` to return an optional

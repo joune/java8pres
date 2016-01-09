@@ -26,8 +26,8 @@ public class OperatorsRegistry
     return new OperatorsRegistry(Collections.unmodifiableMap(newOperators));
   }
 
-  public BinaryOperator<Double> find(String designation)
+  public Optional<BinaryOperator<Double>> find(String designation)
   {
-    return operators.get(designation);
+    return Optional.ofNullable(operators.get(designation));
   }
 }
