@@ -35,3 +35,13 @@
 4. Git diff - whole bunch of classes removed
 4.1. Hint - Java 8 comes with a lot of "functional" interfaces. Look at Javadoc. Use Java's Operator. Git diff again.
 5. AlgebraicOperators serves sharing those operators, so let's keep it. Don't like the Map stuff though.
+
+0. Note: so far we were changing a lot of things, but only those which concern us. We didn't even touch the 
+   Calculator class. Separation of concerns is cool and we're good at it. With new tools we are even better.
+   
+0. Now the Main - we have the exception... Why would we? Let's design a class for "result or error"
+1. ResultOrError. Now we still have an if in the Main
+2. Add `forEach` a function to it. Better we have this if inside now though.
+3. Also, construction is not evident - do we pass result or error
+4. Notice how Main became declarative now. Instead of telling to iterate and checking, we "define" what the output is.
+5. Also, it seems to be a common need. Let's factorize - `Either`

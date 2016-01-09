@@ -13,7 +13,7 @@ public class Calculator
     this.operators = operators;
   }
 
-  public double calculate(String expr) throws IllegalArgumentException
+  public Either<String,Double> calculate(String expr)
   {
     String[] elements = expr.split(" ");
     Queue<Double> calcStack = Collections.asLifoQueue(new ArrayDeque<Double>());
@@ -25,18 +25,18 @@ public class Calculator
         Double nextResult = op.apply(op1, op2);
         calcStack.add(nextResult);
       } else if (op != null) {
-        throw new IllegalArgumentException(String.format("not enough arguments for %s", element));
+        return new Either.Left<>(String.format("not enough arguments for %s", element));
       } else if (!NumberUtils.isNumeric(element)) {
-        throw new IllegalArgumentException(String.format("cannot parse element %s", element));
+        return new Either.Left<>(String.format("cannot parse element %s", element));
       } else {
         calcStack.add(Double.parseDouble(element));
       }
     }
 
     if (calcStack.size() == 1) {
-      return calcStack.poll();
+      return new Either.Right<>(calcStack.poll());
     } else {
-      throw new IllegalArgumentException(String.format("no operator found but result is not final: %s", calcStack.toString()));
+      return new Either.Left<>(String.format("no operator found but result is not final: %s", calcStack.toString()));
     }
   }
 }

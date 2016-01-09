@@ -11,33 +11,33 @@ public class RpnTest
   @Test
   public void testOperators()
   {
-    assertEquals( 5.0, calculator.calculate("2 3 +"), 0.01);
-    assertEquals(-1.0, calculator.calculate("2 3 -"), 0.01);
-    assertEquals( 6.0, calculator.calculate("2 3 *"), 0.01);
-    assertEquals(0.66, calculator.calculate("2 3 /"), 0.01);
+    assertEquals( 5.0, calculator.calculate("2 3 +").getRight(), 0.01);
+    assertEquals(-1.0, calculator.calculate("2 3 -").getRight(), 0.01);
+    assertEquals( 6.0, calculator.calculate("2 3 *").getRight(), 0.01);
+    assertEquals(0.66, calculator.calculate("2 3 /").getRight(), 0.01);
   }
 
   @Test
   public void testExpressions()
   {
-    assertEquals(-4.0, calculator.calculate("10 4 3 + 2 * -"), 0.01);
+    assertEquals(-4.0, calculator.calculate("10 4 3 + 2 * -").getRight(), 0.01);
   }
 
-  @Test(expected=IllegalArgumentException.class)
+  @Test
   public void testUnknownOperator()
   {
-    calculator.calculate("1 2 ?");
+    assertTrue(calculator.calculate("1 2 ?").isLeft());
   }
 
-  @Test(expected=IllegalArgumentException.class)
+  @Test
   public void testNotEnoughOperators()
   {
-    calculator.calculate("1 2");
+    assertTrue(calculator.calculate("1 2").isLeft());
   }
 
-  @Test(expected=IllegalArgumentException.class)
+  @Test
   public void testNotEnoughArguments()
   {
-    calculator.calculate("1 +");
+    assertTrue(calculator.calculate("1 +").isLeft());
   }
 }
