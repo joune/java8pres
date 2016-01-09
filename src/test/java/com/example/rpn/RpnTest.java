@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class RpnTest
 {
-  private Calculator calculator = new Calculator(OperatorsRegistry.of(AlgebraicOperators.OPERATORS));
+  private Calculator calculator = new Calculator(AlgebraicOperators.OPERATORS);
 
   @Test
   public void testOperators()

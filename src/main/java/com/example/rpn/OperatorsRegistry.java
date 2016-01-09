@@ -7,23 +7,23 @@ import java.util.function.BinaryOperator;
 
 public class OperatorsRegistry
 {
-  private Map<String,BinaryOperator<Double>> operators = new HashMap<>();
+  private Map<String,BinaryOperator<Double>> operators;
 
   private OperatorsRegistry(Map<String,BinaryOperator<Double>> operators)
   {
     this.operators = operators;
   }
 
-  /*public static OperatorsRegistry of(Operator... ops)
+  public static OperatorsRegistry empty()
   {
-    Map<String, Operator> operators = Arrays.stream(ops).collect(
-        Collectors.toMap(Operator::designation, Function.identity()));
-    return new OperatorsRegistry(operators);
-  }*/
+    return new OperatorsRegistry(new HashMap<>());
+  }
 
-  public static OperatorsRegistry of(Map<String,BinaryOperator<Double>> operators)
+  public OperatorsRegistry withOperator(String designation, BinaryOperator<Double> operator)
   {
-    return new OperatorsRegistry(operators);
+    Map<String, BinaryOperator<Double>> newOperators = new HashMap<>(operators);
+    newOperators.put(designation, operator);
+    return new OperatorsRegistry(Collections.unmodifiableMap(newOperators));
   }
 
   public BinaryOperator<Double> find(String designation)

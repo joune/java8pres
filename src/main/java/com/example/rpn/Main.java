@@ -7,7 +7,7 @@ public class Main
 {
   public static void main(String[] args)
   {
-    Calculator calculator = new Calculator(OperatorsRegistry.of(AlgebraicOperators.OPERATORS));
+    Calculator calculator = new Calculator(AlgebraicOperators.OPERATORS);
     Arrays.stream(args).forEach( expr -> {
       try {
         double result = calculator.calculate(expr);
