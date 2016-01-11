@@ -41,10 +41,10 @@
    
 0. Now the Main - we have the exception... Why would we? Let's design a class for "result or error"
 1. ResultOrError. Now we still have an if in the Main
-2. Add `forEach` a function to it. Better we have this if inside now though.
+2. Add `map` a function to it. Better we have this if inside now though.
 3. Also, construction is not evident - do we pass result or error
 4. Notice how Main became declarative now. Instead of telling to iterate and checking, we "define" what the output is.
-5. Also, it seems to be a common need. Let's factorize - `Either`
+5. Also, it seems to be a common need. Let's factorize - `Either`. Reverse the order of parameters. `map` -> `bimap` (not a functor)
 
 0. Now the last piece - `Calculator` itself: for loop, multiple return statements.
 1. We want to walk the stack and come to a single value - reduce it to a single value

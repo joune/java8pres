@@ -12,7 +12,7 @@ public abstract class Either<L,R>
   public boolean isRight() { return !isLeft(); }
   public abstract R getRight();
   public abstract L getLeft();
-  public abstract void forEach(Consumer<R> forResult, Consumer<L> forError);
+  public abstract <T> T bimap(Function<L,T> mapLeft, Function<R,T> mapRight);
   public abstract <M> Either<L,M> flatMap(Function<R,Either<L,M>> fn);
 
   public static class Left<L,R> extends Either<L,R>
@@ -22,7 +22,7 @@ public abstract class Either<L,R>
     public boolean isLeft() { return true; }
     public R getRight() { throw new UnsupportedOperationException("Left.getRight()"); }
     public L getLeft() { return leftValue; }
-    public void forEach(Consumer<R> forResult, Consumer<L> forError) { forError.accept(leftValue); }
+    public <T> T bimap(Function<L,T> mapLeft, Function<R,T> mapRight) { return mapLeft.apply(leftValue); }
     public <M> Either<L,M> flatMap(Function<R,Either<L,M>> fn) { return new Left<>(leftValue); }
   }
 
@@ -33,7 +33,7 @@ public abstract class Either<L,R>
     public boolean isLeft() { return false; }
     public R getRight() { return rightValue; }
     public L getLeft() { throw new UnsupportedOperationException("Right.getLeft()"); }
-    public void forEach(Consumer<R> forResult, Consumer<L> forError) { forResult.accept(rightValue); }
+    public <T> T bimap(Function<L,T> mapLeft, Function<R,T> mapRight) { return mapRight.apply(rightValue); }
     public <M> Either<L,M> flatMap(Function<R,Either<L,M>> fn) { return fn.apply(rightValue); }
   }
 }
